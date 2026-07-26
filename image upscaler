@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gamermaid AI Image Upscaler</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #2563eb;
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #64748b;
+      margin-bottom: 40px;
+    }
+
+    .upload-box {
+      background: white;
+      border: 2px dashed #cbd5e1;
+      border-radius: 20px;
+      padding: 60px 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .upload-box:hover {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .upload-icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    .upload-text {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .upload-help {
+      color: #64748b;
+      margin-top: 10px;
+    }
+
+    #fileInput {
+      display: none;
+    }
+
+    #preview {
+      max-width: 100%;
+      max-height: 400px;
+      margin: 30px auto;
+      border-radius: 12px;
+      display: none;
+    }
+
+    .options {
+      margin: 30px 0;
+      display: none;
+    }
+
+    .options button {
+      padding: 12px 25px;
+      margin: 5px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .options button.active {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+    }
+
+    #enhanceButton {
+      display: none;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 12px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #enhanceButton:hover {
+      background: #1d4ed8;
+    }
+
+    #downloadButton {
+      display: none;
+      margin-top: 20px;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 12px;
+      background: #16a34a;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #status {
+      margin-top: 20px;
+      color: #64748b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      Gamermaid AI
+    </div>
+
+    <h1>AI Image Upscaler</h1>
+
+    <p class="subtitle">
+      Enhance and upscale your images with AI.
+    </p>
+
+    <label class="upload-box" for="fileInput">
+
+      <div class="upload-icon">
+        🖼️
+      </div>
+
+      <div class="upload-text">
+        Click to upload an image
+      </div>
+
+      <div class="upload-help">
+        JPG, PNG, or WEBP
+      </div>
+
+    </label>
+
+    <input
+      type="file"
+      id="fileInput"
+      accept="image/png, image/jpeg, image/webp"
+    >
+
+    <img id="preview">
+
+    <div class="options" id="options">
+
+      <p><strong>Choose upscale size</strong></p>
+
+      <button id="x2Button" class="active">
+        2×
+      </button>
+
+      <button id="x4Button">
+        4×
+      </button>
+
+    </div>
+
+    <button id="enhanceButton">
+      ✨ Enhance Image
+    </button>
+
+    <div id="status"></div>
+
+    <button id="downloadButton">
+      ⬇️ Download Image
+    </button>
+
+  </div>
+
+  <script>
+
+    const fileInput = document.getElementById("fileInput");
+    const preview = document.getElementById("preview");
+    const options = document.getElementById("options");
+    const enhanceButton = document.getElementById("enhanceButton");
+    const downloadButton = document.getElementById("downloadButton");
+    const status = document.getElementById("status");
+
+    const x2Button = document.getElementById("x2Button");
+    const x4Button = document.getElementById("x4Button");
+
+    let selectedFile = null;
+    let scale = 2;
+
+    fileInput.addEventListener("change", function() {
+
+      selectedFile = fileInput.files[0];
+
+      if (!selectedFile) {
+        return;
+      }
+
+      const imageURL = URL.createObjectURL(selectedFile);
+
+      preview.src = imageURL;
+      preview.style.display = "block";
+
+      options.style.display = "block";
+      enhanceButton.style.display = "inline-block";
+
+      downloadButton.style.display = "none";
+
+      status.textContent = "";
+
+    });
+
+    x2Button.addEventListener("click", function() {
+
+      scale = 2;
+
+      x2Button.classList.add("active");
+      x4Button.classList.remove("active");
+
+    });
+
+    x4Button.addEventListener("click", function() {
+
+      scale = 4;
+
+      x4Button.classList.add("active");
+      x2Button.classList.remove("active");
+
+    });
+
+    enhanceButton.addEventListener("click", function() {
+
+      if (!selectedFile) {
+        return;
+      }
+
+      status.textContent = "Processing your image...";
+
+      const image = new Image();
+
+      image.onload = function() {
+
+        const canvas = document.createElement("canvas");
+
+        canvas.width = image.width * scale;
+        canvas.height = image.height * scale;
+
+        const context = canvas.getContext("2d");
+
+        context.drawImage(
+          image,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        canvas.toBlob(function(blob) {
+
+          const downloadURL = URL.createObjectURL(blob);
+
+          downloadButton.style.display = "inline-block";
+
+          status.textContent =
+            "Image enlarged successfully!";
+
+          downloadButton.onclick = function() {
+
+            const link = document.createElement("a");
+
+            link.href = downloadURL;
+
+            link.download =
+              "gamermaid-upscaled-image.png";
+
+            link.click();
+
+          };
+
+        }, "image/png");
+
+      };
+
+      image.src = URL.createObjectURL(selectedFile);
+
+    });
+
+  </script>
+
+</body>
+</html>
