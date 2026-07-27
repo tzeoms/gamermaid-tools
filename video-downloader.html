@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Gamermaid Video Downloader</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>🎬 Gamermaid Video Downloader</h1>
+
+    <p class="subtitle">
+        Download videos from supported platforms
+    </p>
+
+
+    <div class="downloader-card">
+
+        <h2>Paste Video URL</h2>
+
+        <p>
+            Enter the URL of a video you own or have permission to download.
+        </p>
+
+
+        <div class="url-box">
+
+            <input
+                type="url"
+                id="videoUrl"
+                placeholder="Paste video URL here..."
+            >
+
+            <button id="analyzeButton">
+                🔍 Analyze
+            </button>
+
+        </div>
+
+
+        <div class="supported">
+
+            <span>Supported platforms:</span>
+
+            <div class="platforms">
+
+                <span>▶️ YouTube</span>
+
+                <span>🎵 TikTok</span>
+
+                <span>📸 Instagram</span>
+
+                <span>📘 Facebook</span>
+
+            </div>
+
+        </div>
+
+
+        <div id="status"
+        class="status"
+        style="display:none">
+        </div>
+
+
+        <div id="result"
+        class="result"
+        style="display:none">
+
+            <div class="video-preview">
+
+                <div class="thumbnail">
+                    🎬
+                </div>
+
+                <div class="video-info">
+
+                    <h3 id="videoTitle">
+                        Video Ready
+                    </h3>
+
+                    <p id="videoPlatform">
+                        Platform detected
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="download-options">
+
+                <h3>
+                    Download Options
+                </h3>
+
+
+                <div class="download-row">
+
+                    <select id="quality">
+
+                        <option value="1080">
+                            1080p HD
+                        </option>
+
+                        <option value="720">
+                            720p HD
+                        </option>
+
+                        <option value="480">
+                            480p
+                        </option>
+
+                        <option value="360">
+                            360p
+                        </option>
+
+                    </select>
+
+
+                    <button id="downloadButton">
+
+                        ⬇️ Download
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="notice">
+
+            ⚠️ Only download videos that you own
+            or have permission to download.
+
+        </div>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="icon">
+                ⚡
+            </div>
+
+            <h3>Fast</h3>
+
+            <p>
+                Simple and fast video processing.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                📱
+            </div>
+
+            <h3>Multiple Platforms</h3>
+
+            <p>
+                One tool for your favorite platforms.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                🆓
+            </div>
+
+            <h3>Free</h3>
+
+            <p>
+                No software installation required.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="video-downloader.js"></script>
+
+</body>
+
+</html>
