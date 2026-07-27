@@ -43,3 +43,210 @@ padding:12px 25px;
 border-radius:10px;
 cursor:pointer;
 }
+
+/* =========================
+   VIDEO DOWNLOADER
+========================= */
+
+.subtitle {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+
+.downloader-card {
+    max-width: 850px;
+    margin: auto;
+    padding: 35px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+}
+
+
+.url-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+
+.url-box input {
+    flex: 1;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+
+.url-box input:focus {
+    border-color: #7c3aed;
+}
+
+
+.url-box button,
+.download-row button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #7c3aed;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.url-box button:hover,
+.download-row button:hover {
+    opacity: 0.9;
+}
+
+
+.supported {
+    margin-top: 25px;
+    color: #777;
+}
+
+
+.platforms {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+
+.platforms span {
+    padding: 8px 12px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+
+.status {
+    margin-top: 25px;
+    padding: 15px;
+    background: #f5f3ff;
+    border-radius: 10px;
+    color: #6d28d9;
+}
+
+
+.result {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 15px;
+    background: #fafafa;
+}
+
+
+.video-preview {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.thumbnail {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ddd;
+    border-radius: 10px;
+    font-size: 30px;
+}
+
+
+.video-info h3 {
+    margin: 0 0 8px;
+}
+
+
+.video-info p {
+    margin: 0;
+    color: #777;
+}
+
+
+.download-options {
+    margin-top: 25px;
+}
+
+
+.download-row {
+    display: flex;
+    gap: 10px;
+}
+
+
+.download-row select {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+
+.notice {
+    margin-top: 25px;
+    font-size: 13px;
+    color: #777;
+    text-align: center;
+}
+
+
+.features {
+    max-width: 850px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns:
+        repeat(3, 1fr);
+    gap: 20px;
+}
+
+
+.feature {
+    padding: 25px;
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+}
+
+
+.feature .icon {
+    font-size: 30px;
+}
+
+
+@media (max-width: 600px) {
+
+    .downloader-card {
+        padding: 20px;
+    }
+
+
+    .url-box {
+        flex-direction: column;
+    }
+
+
+    .url-box button {
+        width: 100%;
+    }
+
+
+    .download-row {
+        flex-direction: column;
+    }
+
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+}
