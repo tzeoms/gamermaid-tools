@@ -3,55 +3,118 @@ const preview = document.getElementById("preview");
 const button = document.getElementById("process");
 const download = document.getElementById("download");
 
-
-let image;
-
-
-input.onchange = function(){
-
-image = new Image();
-
-image.src = URL.createObjectURL(
-input.files[0]
-);
-
-image.onload = function(){
-
-preview.src = image.src;
-
-}
-
-}
+let selectedFile;
 
 
+input.addEventListener("change", () => {
 
-button.onclick=function(){
+    selectedFile = input.files[0];
 
-let canvas=document.createElement("canvas");
+    if (!selectedFile) return;
 
-canvas.width=image.width*2;
-canvas.height=image.height*2;
+    preview.src = URL.createObjectURL(selectedFile);
+    preview.style.display = "block";
 
-
-let ctx=canvas.getContext("2d");
-
-ctx.drawImage(
-image,
-0,
-0,
-canvas.width,
-canvas.height
-);
+});
 
 
-download.href =
-canvas.toDataURL();
+button.addEventListener("click", async () => {
+
+    if (!selectedFile) {
+        alert("Upload an image first");
+        return;
+    }
 
 
-download.download =
-"gamermaid-upscaled.png";
+    button.innerText = "AI Processing...";
+    button.disabled = true;
 
 
-download.style.display="inline";
+    const formData = new FormData();
 
-}
+    formData.append(
+        "image",
+        selectedFile
+    );
+
+
+    try {
+
+        const response = await fetch(
+            "https://gamermaid-ai-api.tze-oms.workers.dev/",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+
+        if (!response.ok) {
+
+            const error =
+                await response.text();
+
+            console.log(error);
+
+            alert(
+                "AI failed: " + error
+            );
+
+            button.innerText =
+                "✨ Enhance Image";
+
+            button.disabled = false;
+
+            return;
+        }
+
+
+        const blob =
+            await response.blob();
+
+
+        const resultURL =
+            URL.createObjectURL(blob);
+
+
+        preview.src =
+            resultURL;
+
+
+        download.href =
+            resultURL;
+
+
+        download.download =
+            "gamermaid-enhanced.png";
+
+
+        download.style.display =
+            "inline-block";
+
+
+        button.innerText =
+            "✨ Enhance Image";
+
+
+        button.disabled =
+            false;
+
+
+    } catch(error) {
+
+        console.log(error);
+
+        alert(
+            "Connection error"
+        );
+
+
+        button.innerText =
+            "✨ Enhance Image";
+
+        button.disabled =
+            false;
+    }
+
+});
