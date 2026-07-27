@@ -22,7 +22,18 @@ const videoTitle =
 const videoPlatform =
     document.getElementById("videoPlatform");
 
+const thumbnail =
+    document.getElementById("thumbnail");
 
+
+// Your Cloudflare Worker
+
+const VIDEO_API =
+    "https://gamermaid-video-api.tze-oms.workers.dev/";
+
+
+
+// Show messages
 
 function showStatus(message) {
 
@@ -34,33 +45,29 @@ function showStatus(message) {
 
 
 
+// Detect platform
+
 function detectPlatform(url) {
 
     if (
         url.includes("youtube.com") ||
         url.includes("youtu.be")
     ) {
-
         return "YouTube";
-
     }
 
 
     if (
         url.includes("tiktok.com")
     ) {
-
         return "TikTok";
-
     }
 
 
     if (
         url.includes("instagram.com")
     ) {
-
         return "Instagram";
-
     }
 
 
@@ -68,9 +75,7 @@ function detectPlatform(url) {
         url.includes("facebook.com") ||
         url.includes("fb.watch")
     ) {
-
         return "Facebook";
-
     }
 
 
@@ -80,18 +85,95 @@ function detectPlatform(url) {
 
 
 
+// Analyze button
+
 analyzeButton.addEventListener(
-    "click",
-    async () => {
-
-        const url =
-            videoUrl.value.trim();
+"click",
+async () => {
 
 
-        if (!url) {
+    const url =
+        videoUrl.value.trim();
+
+
+
+    if (!url) {
+
+        showStatus(
+            "Please paste a video URL first."
+        );
+
+        return;
+
+    }
+
+
+
+    const platform =
+        detectPlatform(url);
+
+
+
+    if (!platform) {
+
+        showStatus(
+            "Unsupported platform."
+        );
+
+        return;
+
+    }
+
+
+
+    analyzeButton.disabled = true;
+
+    analyzeButton.innerText =
+        "🔍 Checking...";
+
+
+    showStatus(
+        "Connecting to Gamermaid API..."
+    );
+
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                VIDEO_API,
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                        "application/json"
+                    },
+
+
+                    body:
+                    JSON.stringify({
+                        url:url
+                    })
+
+                }
+            );
+
+
+
+        const data =
+            await response.json();
+
+
+
+        if (!response.ok) {
 
             showStatus(
-                "Please paste a video URL first."
+                data.error ||
+                "API error"
             );
 
             return;
@@ -99,77 +181,95 @@ analyzeButton.addEventListener(
         }
 
 
-        const platform =
-            detectPlatform(url);
 
 
-        if (!platform) {
+        // Display result
 
-            showStatus(
-                "This platform is not supported yet."
-            );
 
-            return;
+        videoTitle.innerText =
+            data.title ||
+            `${data.platform} Video`;
+
+
+
+        videoPlatform.innerText =
+            `${data.platform} • Ready`;
+
+
+
+        if (data.thumbnail) {
+
+            thumbnail.src =
+                data.thumbnail;
 
         }
 
 
-        analyzeButton.disabled =
-            true;
 
+        result.style.display =
+            "block";
 
-        analyzeButton.innerText =
-            "🔍 Checking...";
 
 
         showStatus(
-            `Detected ${platform}. Preparing video...`
+            "Video information loaded!"
         );
 
 
-        // FRONTEND DEMO ONLY
-        // Backend will be connected later.
-
-
-        setTimeout(() => {
-
-            videoTitle.innerText =
-                `${platform} Video`;
-
-            videoPlatform.innerText =
-                `${platform} • Ready to process`;
-
-
-            result.style.display =
-                "block";
-
-
-            status.innerText =
-                "Video detected successfully.";
-
-
-            analyzeButton.disabled =
-                false;
-
-
-            analyzeButton.innerText =
-                "🔍 Analyze";
-
-
-        }, 1000);
 
     }
-);
+
+    catch(error) {
 
 
+        console.error(error);
+
+
+        showStatus(
+            "Connection failed."
+        );
+
+
+    }
+
+
+
+    finally {
+
+
+        analyzeButton.disabled =
+            false;
+
+
+        analyzeButton.innerText =
+            "🔍 Analyze";
+
+
+    }
+
+
+
+});
+
+
+
+
+
+// Download button
 
 downloadButton.addEventListener(
-    "click",
-    () => {
+"click",
+() => {
 
-        alert(
-            "The download system is not connected yet. We will connect the backend next."
-        );
 
-    }
-);
+    const selectedQuality =
+        quality.value;
+
+
+
+    alert(
+        `Download requested: ${selectedQuality}p\n\nBackend download system will be connected next.`
+    );
+
+
+});
