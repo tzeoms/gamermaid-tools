@@ -7,34 +7,240 @@
 
 <style>
 
+* {
+    box-sizing:border-box;
+}
+
 body {
     margin:0;
-    background:#111;
+    background:#0b0b12;
     color:white;
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-.header {
+
+/* Header */
+
+.hero {
+
     text-align:center;
-    padding:30px;
+    padding:60px 20px 40px;
+
 }
 
-.tool-box {
-    width:95%;
+
+.hero h1 {
+
+    font-size:42px;
+    margin-bottom:15px;
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+}
+
+
+.hero p {
+
+    color:#aaa;
+    font-size:18px;
+
+}
+
+
+
+/* Main Card */
+
+.container {
+
     max-width:1200px;
     margin:auto;
-    background:#1e1e1e;
-    border-radius:20px;
-    overflow:hidden;
+    padding:20px;
+
 }
+
+
+
+.card {
+
+    background:#15151f;
+
+    border:1px solid #29293d;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.5);
+
+}
+
+
+
+/* Tool Header */
+
+.tool-header {
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.tool-title {
+
+    font-size:24px;
+    font-weight:bold;
+
+}
+
+
+
+.badge {
+
+    background:#8b5cf6;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+
+
+/* iframe */
+
 
 iframe {
+
     width:100%;
-    height:1000px;
-    border:0;
+
+    height:950px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:white;
+
 }
 
+
+
+/* Other tools */
+
+
+.tools {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+
+    margin-top:40px;
+
+}
+
+
+
+.tool-box {
+
+    background:#15151f;
+
+    border:1px solid #29293d;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    transition:.3s;
+
+}
+
+
+
+.tool-box:hover {
+
+    transform:translateY(-5px);
+
+    border-color:#8b5cf6;
+
+}
+
+
+
+.tool-box h3 {
+
+    margin-top:0;
+
+}
+
+
+
+.tool-box p {
+
+    color:#aaa;
+
+}
+
+
+
+.button {
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:12px 25px;
+
+    border-radius:30px;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+}
+
+
+
+.footer {
+
+    text-align:center;
+
+    padding:40px;
+
+    color:#777;
+
+}
+
+
 </style>
+
 
 </head>
 
@@ -42,24 +248,130 @@ iframe {
 <body>
 
 
-<div class="header">
+<section class="hero">
 
-<h1>🖼️ Gamermaid AI Image Studio</h1>
+
+<h1>
+🖼️ Gamermaid AI Image Studio
+</h1>
+
 
 <p>
-AI image enhancement tools
+Enhance, edit and optimize your images with AI-powered tools.
 </p>
 
+
+</section>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<div class="tool-header">
+
+<div class="tool-title">
+✨ AI Image Upscaler
 </div>
 
 
-<div class="tool-box">
+<div class="badge">
+AI POWERED
+</div>
+
+
+</div>
+
 
 <iframe
 src="https://imgupscaler.com/">
 </iframe>
 
+
 </div>
+
+
+
+
+
+<div class="tools">
+
+
+<div class="tool-box">
+
+<h3>
+🧹 Background Remover
+</h3>
+
+<p>
+Remove image backgrounds instantly.
+</p>
+
+
+<a class="button">
+Coming Soon
+</a>
+
+</div>
+
+
+
+
+<div class="tool-box">
+
+<h3>
+📦 Image Compressor
+</h3>
+
+<p>
+Reduce image size while keeping quality.
+</p>
+
+
+<a class="button">
+Coming Soon
+</a>
+
+</div>
+
+
+
+
+<div class="tool-box">
+
+<h3>
+🎨 AI Image Editor
+</h3>
+
+<p>
+Edit and transform images using AI.
+</p>
+
+
+<a class="button">
+Coming Soon
+</a>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="footer">
+
+Powered by Gamermaid AI Tools
+
+</div>
+
 
 
 </body>
