@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Gamermaid Image Cropper</title>
+
+<style>
+
+body {
+    margin:0;
+    background:#0b0b12;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    padding:40px;
+}
+
+
+.container {
+
+    max-width:800px;
+    margin:auto;
+
+    background:#15151f;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+
+}
+
+
+h1 {
+
+    font-size:38px;
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+}
+
+
+input, select, button {
+
+    margin:10px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:none;
+
+}
+
+
+select {
+
+    background:#222;
+    color:white;
+
+}
+
+
+button {
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+canvas {
+
+    max-width:90%;
+
+    margin-top:20px;
+
+    border-radius:15px;
+
+}
+
+
+.download {
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px 30px;
+
+    background:#22c55e;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+🖼️ Gamermaid Image Cropper
+</h1>
+
+
+<p>
+Crop images for social media and websites.
+</p>
+
+
+
+<input 
+type="file"
+id="upload"
+accept="image/*"
+>
+
+
+<br>
+
+
+
+<select id="preset" onchange="changePreset()">
+
+<option value="free">
+Free Crop
+</option>
+
+<option value="1080,1080">
+Instagram Square 1080x1080
+</option>
+
+<option value="1280,720">
+YouTube Thumbnail 1280x720
+</option>
+
+<option value="512,512">
+Profile Picture 512x512
+</option>
+
+<option value="1080,1920">
+TikTok 1080x1920
+</option>
+
+</select>
+
+
+<br>
+
+
+<button onclick="cropImage()">
+Crop Image
+</button>
+
+
+
+<br>
+
+
+<canvas id="canvas"></canvas>
+
+
+<br>
+
+
+<a id="download" class="download">
+Download
+</a>
+
+
+
+</div>
+
+
+
+<script>
+
+
+let imgFile;
+
+
+let img =
+new Image();
+
+
+
+const upload =
+document.getElementById("upload");
+
+
+
+upload.onchange = ()=>{
+
+
+imgFile =
+upload.files[0];
+
+
+img.src =
+URL.createObjectURL(imgFile);
+
+
+};
+
+
+
+function changePreset(){
+
+const value =
+document.getElementById("preset").value;
+
+
+if(value !== "free"){
+
+const size =
+value.split(",");
+
+
+canvas.width =
+Number(size[0]);
+
+
+canvas.height =
+Number(size[1]);
+
+}
+
+}
+
+
+
+
+function cropImage(){
+
+
+if(!imgFile){
+
+alert("Upload an image first");
+
+return;
+
+}
+
+
+
+const canvas =
+document.getElementById("canvas");
+
+
+const ctx =
+canvas.getContext("2d");
+
+
+
+const preset =
+document.getElementById("preset").value;
+
+
+
+if(preset !== "free"){
+
+
+const size =
+preset.split(",");
+
+
+canvas.width =
+Number(size[0]);
+
+
+canvas.height =
+Number(size[1]);
+
+
+}
+
+else {
+
+
+canvas.width =
+img.width;
+
+
+canvas.height =
+img.height;
+
+
+}
+
+
+
+const scale =
+Math.max(
+canvas.width / img.width,
+canvas.height / img.height
+);
+
+
+
+const width =
+img.width * scale;
+
+
+const height =
+img.height * scale;
+
+
+
+const x =
+(canvas.width - width) / 2;
+
+
+const y =
+(canvas.height - height) / 2;
+
+
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+
+ctx.drawImage(
+img,
+x,
+y,
+width,
+height
+);
+
+
+
+const url =
+canvas.toDataURL(
+"image/png"
+);
+
+
+
+const download =
+document.getElementById("download");
+
+
+download.href =
+url;
+
+
+download.download =
+"gamermaid-cropped.png";
+
+
+download.style.display =
+"inline-block";
+
+
+download.innerText =
+"⬇️ Download Cropped Image";
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
