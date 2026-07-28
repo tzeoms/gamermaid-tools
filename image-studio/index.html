@@ -3,245 +3,38 @@
 
 <head>
 
-<title>
-Gamermaid Image Studio
-</title>
-
+<title>Gamermaid AI Image Studio</title>
 
 <style>
 
-*{
-box-sizing:border-box;
+body {
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial, sans-serif;
 }
 
-
-body{
-
-margin:0;
-
-background:
-radial-gradient(circle at top,#241047,#09090f 50%);
-
-color:white;
-
-font-family:Arial,Helvetica,sans-serif;
-
+.header {
+    text-align:center;
+    padding:30px;
 }
 
-
-.hero{
-
-text-align:center;
-
-padding:70px 20px 40px;
-
+.tool-box {
+    width:95%;
+    max-width:1200px;
+    margin:auto;
+    background:#1e1e1e;
+    border-radius:20px;
+    overflow:hidden;
 }
 
-
-.hero h1{
-
-font-size:48px;
-
-margin:0;
-
-background:
-linear-gradient(90deg,#8b5cf6,#ec4899);
-
--webkit-background-clip:text;
-
-color:transparent;
-
+iframe {
+    width:100%;
+    height:1000px;
+    border:0;
 }
-
-
-.hero p{
-
-color:#aaa;
-
-font-size:20px;
-
-}
-
-
-
-.container{
-
-max-width:1200px;
-
-margin:auto;
-
-padding:30px;
-
-}
-
-
-
-.grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(280px,1fr));
-
-gap:25px;
-
-}
-
-
-
-.card{
-
-background:
-
-rgba(255,255,255,0.05);
-
-border:
-
-1px solid rgba(255,255,255,0.1);
-
-border-radius:25px;
-
-padding:35px;
-
-backdrop-filter:blur(10px);
-
-transition:.35s;
-
-}
-
-
-.card:hover{
-
-transform:
-translateY(-10px);
-
-border-color:#8b5cf6;
-
-box-shadow:
-
-0 20px 40px rgba(139,92,246,.25);
-
-}
-
-
-
-.card h2{
-
-font-size:25px;
-
-}
-
-
-
-.card p{
-
-color:#aaa;
-
-line-height:1.6;
-
-}
-
-
-
-.button{
-
-display:inline-block;
-
-margin-top:20px;
-
-padding:14px 35px;
-
-border-radius:50px;
-
-text-decoration:none;
-
-color:white;
-
-font-weight:bold;
-
-
-background:
-
-linear-gradient(
-90deg,
-#8b5cf6,
-#ec4899
-);
-
-
-position:relative;
-
-overflow:hidden;
-
-transition:.3s;
-
-}
-
-
-
-.button:hover{
-
-transform:scale(1.08);
-
-box-shadow:
-
-0 0 25px #8b5cf6;
-
-}
-
-
-
-.button::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-
-left:-100%;
-
-width:100%;
-
-height:100%;
-
-background:
-
-linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,.4),
-transparent
-);
-
-transition:.5s;
-
-}
-
-
-
-.button:hover::before{
-
-left:100%;
-
-}
-
-
-
-.footer{
-
-text-align:center;
-
-padding:50px;
-
-color:#777;
-
-}
-
-
 
 </style>
-
 
 </head>
 
@@ -249,146 +42,22 @@ color:#777;
 <body>
 
 
+<div class="header">
 
-<section class="hero">
-
-<h1>
-Gamermaid Image Studio
-</h1>
+<h1>🖼️ Gamermaid AI Image Studio</h1>
 
 <p>
-Professional image tools powered by modern technology.
+AI image enhancement tools
 </p>
 
-</section>
-
-
-
-<div class="card">
-
-<h2>
-AI Upscaler
-</h2>
-
-<p>
-Enhance image quality and increase resolution with AI.
-</p>
-
-<a class="button"
-href="../upscaler.html">
-Open Tool
-</a>
-
 </div>
 
 
+<div class="tool-box">
 
-<div class="card">
-
-<h2>
-Image Converter
-</h2>
-
-<p>
-Convert images between PNG, JPG and WEBP formats.
-</p>
-
-<a class="button"
-href="converter.html">
-Open Tool
-</a>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>
-Image Resizer
-</h2>
-
-<p>
-Resize images for social media and websites.
-</p>
-
-<a class="button"
-href="resizer.html">
-Open Tool
-</a>
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>
-Image Compressor
-</h2>
-
-<p>
-Reduce image file size while keeping quality.
-</p>
-
-<a class="button"
-href="compressor.html">
-Open Tool
-</a>
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>
-Image Cropper
-</h2>
-
-<p>
-Crop images for different platforms.
-</p>
-
-<a class="button"
-href="cropper.html">
-Open Tool
-</a>
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>
-Background Remover
-</h2>
-
-<p>
-Remove image backgrounds with AI.
-</p>
-
-<a class="button">
-Coming Soon
-</a>
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-<div class="footer">
-
-Gamermaid AI Tools
+<iframe
+src="https://imgupscaler.com/">
+</iframe>
 
 </div>
 
