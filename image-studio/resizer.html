@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Gamermaid Image Resizer</title>
+
+<style>
+
+body {
+    margin:0;
+    background:#0b0b12;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    padding:40px;
+}
+
+
+.container {
+
+    max-width:750px;
+    margin:auto;
+
+    background:#15151f;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.5);
+
+}
+
+
+h1 {
+
+    font-size:38px;
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+}
+
+
+input, select, button {
+
+    margin:10px;
+    padding:14px;
+
+    border-radius:12px;
+
+    border:none;
+
+}
+
+
+select, input {
+
+    background:#222;
+    color:white;
+
+}
+
+
+button {
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    padding:15px 35px;
+
+}
+
+
+img {
+
+    max-width:90%;
+
+    margin-top:20px;
+
+    border-radius:15px;
+
+}
+
+
+.download {
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px 30px;
+
+    background:#22c55e;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+}
+
+.row {
+
+    margin:15px;
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+📐 Gamermaid Image Resizer
+</h1>
+
+
+<p>
+Resize images for social media and websites.
+</p>
+
+
+<input 
+type="file"
+id="upload"
+accept="image/*"
+>
+
+
+<br>
+
+
+<select id="preset" onchange="setPreset()">
+
+<option value="">
+Custom Size
+</option>
+
+<option value="1080,1080">
+Instagram Post 1080x1080
+</option>
+
+<option value="1280,720">
+YouTube Thumbnail 1280x720
+</option>
+
+<option value="512,512">
+Profile Picture 512x512
+</option>
+
+<option value="1080,1920">
+TikTok 1080x1920
+</option>
+
+</select>
+
+
+<div class="row">
+
+<input 
+type="number"
+id="width"
+placeholder="Width"
+>
+
+
+<input 
+type="number"
+id="height"
+placeholder="Height"
+>
+
+</div>
+
+
+<button onclick="resizeImage()">
+Resize Image
+</button>
+
+
+<br>
+
+
+<img id="preview">
+
+
+<br>
+
+
+<a id="download" class="download">
+Download Image
+</a>
+
+
+</div>
+
+
+
+<script>
+
+
+let file;
+
+
+const upload =
+document.getElementById("upload");
+
+
+const preview =
+document.getElementById("preview");
+
+
+
+upload.onchange = ()=>{
+
+
+file =
+upload.files[0];
+
+
+preview.src =
+URL.createObjectURL(file);
+
+
+};
+
+
+
+function setPreset(){
+
+
+const value =
+document.getElementById("preset").value;
+
+
+if(value){
+
+
+const size =
+value.split(",");
+
+
+document.getElementById("width").value =
+size[0];
+
+
+document.getElementById("height").value =
+size[1];
+
+
+}
+
+
+}
+
+
+
+
+function resizeImage(){
+
+
+if(!file){
+
+alert("Upload an image first");
+
+return;
+
+}
+
+
+const img =
+new Image();
+
+
+img.src =
+URL.createObjectURL(file);
+
+
+
+img.onload = ()=>{
+
+
+const canvas =
+document.createElement("canvas");
+
+
+const width =
+Number(document.getElementById("width").value);
+
+
+const height =
+Number(document.getElementById("height").value);
+
+
+
+if(!width || !height){
+
+alert("Enter size");
+
+return;
+
+}
+
+
+canvas.width =
+width;
+
+
+canvas.height =
+height;
+
+
+
+const ctx =
+canvas.getContext("2d");
+
+
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+
+
+const url =
+canvas.toDataURL(
+"image/png"
+);
+
+
+
+preview.src =
+url;
+
+
+
+const download =
+document.getElementById("download");
+
+
+download.href =
+url;
+
+
+download.download =
+"gamermaid-resized.png";
+
+
+download.style.display =
+"inline-block";
+
+
+download.innerText =
+"⬇️ Download Resized Image";
+
+
+};
+
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
