@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Gamermaid Image Converter</title>
+
+<style>
+
+body {
+    margin:0;
+    background:#0b0b12;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    padding:40px;
+}
+
+
+.container {
+
+    max-width:700px;
+    margin:auto;
+    background:#15151f;
+    padding:40px;
+    border-radius:25px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.5);
+
+}
+
+
+h1 {
+
+    font-size:38px;
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+}
+
+
+input, select, button {
+
+    margin:15px;
+    padding:15px;
+
+    border-radius:12px;
+    border:none;
+
+}
+
+
+select {
+
+    background:#222;
+    color:white;
+
+}
+
+
+button {
+
+    background:linear-gradient(
+        90deg,
+        #8b5cf6,
+        #ec4899
+    );
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+img {
+
+    max-width:90%;
+    margin-top:20px;
+    border-radius:15px;
+
+}
+
+
+.download {
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px 30px;
+
+    background:#22c55e;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+🔄 Gamermaid Image Converter
+</h1>
+
+
+<p>
+Convert images instantly in your browser.
+</p>
+
+
+<input 
+type="file"
+id="upload"
+accept="image/*"
+>
+
+
+<br>
+
+
+<select id="format">
+
+<option value="png">
+PNG
+</option>
+
+<option value="jpeg">
+JPG
+</option>
+
+<option value="webp">
+WEBP
+</option>
+
+</select>
+
+
+<br>
+
+
+<button onclick="convert()">
+Convert Image
+</button>
+
+
+<br>
+
+
+<img id="preview">
+
+
+<br>
+
+
+<a id="download"
+class="download">
+Download
+</a>
+
+
+</div>
+
+
+
+<script>
+
+
+let file;
+
+
+const upload =
+document.getElementById("upload");
+
+
+const preview =
+document.getElementById("preview");
+
+
+upload.onchange = () => {
+
+file = upload.files[0];
+
+
+preview.src =
+URL.createObjectURL(file);
+
+};
+
+
+
+function convert(){
+
+if(!file){
+
+alert("Upload an image first");
+
+return;
+
+}
+
+
+const img =
+new Image();
+
+
+img.src =
+URL.createObjectURL(file);
+
+
+
+img.onload = () => {
+
+
+const canvas =
+document.createElement("canvas");
+
+
+canvas.width =
+img.width;
+
+
+canvas.height =
+img.height;
+
+
+const ctx =
+canvas.getContext("2d");
+
+
+ctx.drawImage(
+img,
+0,
+0
+);
+
+
+
+const format =
+document.getElementById("format").value;
+
+
+
+const url =
+canvas.toDataURL(
+"image/" + format,
+0.9
+);
+
+
+
+const download =
+document.getElementById("download");
+
+
+download.href =
+url;
+
+
+download.download =
+"gamermaid-converted."+
+(format==="jpeg"?"jpg":format);
+
+
+
+download.style.display =
+"inline-block";
+
+
+download.innerText =
+"⬇️ Download "+format.toUpperCase();
+
+
+};
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
