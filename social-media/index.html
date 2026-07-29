@@ -34,6 +34,8 @@ color:white;
 
 
 
+/* HEADER */
+
 .header{
 
 text-align:center;
@@ -67,8 +69,90 @@ color:#aaa;
 
 font-size:20px;
 
+max-width:700px;
+
+margin:20px auto;
+
+line-height:1.6;
+
 }
 
+
+
+/* FEATURES */
+
+
+.features{
+
+max-width:1000px;
+
+margin:20px auto 50px;
+
+padding:20px;
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+
+
+.feature-card{
+
+background:
+rgba(255,255,255,.06);
+
+border:
+1px solid rgba(255,255,255,.1);
+
+border-radius:20px;
+
+padding:25px;
+
+transition:.3s;
+
+}
+
+
+
+.feature-card:hover{
+
+transform:translateY(-8px);
+
+border-color:#8b5cf6;
+
+box-shadow:
+0 15px 30px rgba(139,92,246,.25);
+
+}
+
+
+
+.feature-card h3{
+
+margin-top:0;
+
+font-size:20px;
+
+}
+
+
+
+.feature-card p{
+
+color:#aaa;
+
+line-height:1.5;
+
+}
+
+
+
+/* MAIN */
 
 
 .container{
@@ -230,11 +314,81 @@ Gamermaid Social Media Suite
 
 
 <p>
-Create content faster with AI
+Create engaging content faster with AI.
+Generate captions, hashtags, video ideas, titles,
+scripts, bios, and more for your favorite platforms.
 </p>
 
 
 </div>
+
+
+
+<div class="features">
+
+
+<div class="feature-card">
+
+<h3>
+AI Captions
+</h3>
+
+<p>
+Create engaging captions with the right tone
+for Instagram, TikTok, Facebook, and other platforms.
+</p>
+
+</div>
+
+
+
+<div class="feature-card">
+
+<h3>
+Hashtag Ideas
+</h3>
+
+<p>
+Discover relevant hashtags to help your content
+reach the right audience.
+</p>
+
+</div>
+
+
+
+<div class="feature-card">
+
+<h3>
+Video Content
+</h3>
+
+<p>
+Generate YouTube titles, descriptions,
+hooks, and short video scripts.
+</p>
+
+</div>
+
+
+
+<div class="feature-card">
+
+<h3>
+Content Planning
+</h3>
+
+<p>
+Create post ideas and content calendars
+to stay consistent.
+</p>
+
+</div>
+
+
+
+</div>
+
 
 
 
@@ -429,12 +583,10 @@ Copy Result
 </div>
 
 
-
-
 <script>
 
 
-const API = 
+const API =
 "https://gamermaid-social-ai-api.tze-oms.workers.dev/";
 
 
@@ -477,22 +629,17 @@ body:JSON.stringify({
 tool:
 document.getElementById("tool").value,
 
-
 topic:
 document.getElementById("topic").value,
-
 
 platform:
 document.getElementById("platform").value,
 
-
 tone:
 document.getElementById("tone").value,
 
-
 language:
 document.getElementById("language").value
-
 
 })
 
@@ -519,18 +666,14 @@ document.getElementById("copy")
 .style.display="inline-block";
 
 
-
 }
 
 catch(error){
 
-
 result.innerText=
 "Error: "+error.message;
 
-
 }
-
 
 
 }
@@ -553,7 +696,6 @@ this.innerText="Copied!";
 
 
 </script>
-
 
 
 </body>
