@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>
+Gamermaid Social Media Suite
+</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<style>
+
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+
+font-family:Arial,sans-serif;
+
+background:
+radial-gradient(circle at top,#241047,#09090f);
+
+color:white;
+
+}
+
+
+
+.header{
+
+text-align:center;
+
+padding:70px 20px 40px;
+
+}
+
+
+
+.header h1{
+
+font-size:45px;
+
+margin:0;
+
+background:
+linear-gradient(90deg,#8b5cf6,#ec4899);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+
+
+.header p{
+
+color:#aaa;
+
+font-size:20px;
+
+}
+
+
+
+.container{
+
+max-width:900px;
+
+margin:auto;
+
+padding:30px;
+
+}
+
+
+
+.card{
+
+background:
+rgba(255,255,255,.06);
+
+border:
+
+1px solid rgba(255,255,255,.1);
+
+border-radius:25px;
+
+padding:35px;
+
+}
+
+
+
+label{
+
+display:block;
+
+margin-top:20px;
+
+color:#ccc;
+
+}
+
+
+
+input,select,textarea{
+
+width:100%;
+
+margin-top:10px;
+
+padding:15px;
+
+border-radius:15px;
+
+border:none;
+
+background:#18181f;
+
+color:white;
+
+font-size:16px;
+
+}
+
+
+
+textarea{
+
+height:120px;
+
+resize:none;
+
+}
+
+
+
+button{
+
+margin-top:25px;
+
+padding:15px 40px;
+
+border:none;
+
+border-radius:50px;
+
+background:
+linear-gradient(90deg,#8b5cf6,#ec4899);
+
+color:white;
+
+font-weight:bold;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+button:hover{
+
+transform:scale(1.05);
+
+box-shadow:
+0 0 25px #8b5cf6;
+
+}
+
+
+
+.result{
+
+margin-top:30px;
+
+background:#111;
+
+padding:25px;
+
+border-radius:20px;
+
+white-space:pre-wrap;
+
+display:none;
+
+}
+
+
+
+.copy{
+
+background:#22c55e;
+
+display:none;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="header">
+
+
+<h1>
+Gamermaid Social Media Suite
+</h1>
+
+
+<p>
+Create content faster with AI
+</p>
+
+
+</div>
+
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+
+<label>
+AI Tool
+</label>
+
+
+<select id="tool">
+
+
+<option value="caption">
+Caption Generator
+</option>
+
+
+<option value="hashtag">
+Hashtag Generator
+</option>
+
+
+<option value="youtube_title">
+YouTube Title Generator
+</option>
+
+
+<option value="youtube_description">
+YouTube Description Generator
+</option>
+
+
+<option value="bio">
+Social Media Bio Generator
+</option>
+
+
+<option value="post_ideas">
+Post Idea Generator
+</option>
+
+
+<option value="script">
+Short Video Script Generator
+</option>
+
+
+<option value="comment_reply">
+Comment Reply Generator
+</option>
+
+
+<option value="content_calendar">
+Content Calendar Generator
+</option>
+
+
+</select>
+
+
+
+<label>
+Topic
+</label>
+
+
+<textarea id="topic"
+placeholder="Example: New gaming PC setup with RGB lights">
+</textarea>
+
+
+
+<label>
+Platform
+</label>
+
+
+<select id="platform">
+
+<option>
+Instagram
+</option>
+
+<option>
+TikTok
+</option>
+
+<option>
+YouTube
+</option>
+
+<option>
+Facebook
+</option>
+
+<option>
+X / Twitter
+</option>
+
+<option>
+LinkedIn
+</option>
+
+</select>
+
+
+
+<label>
+Tone
+</label>
+
+
+<select id="tone">
+
+<option>
+Professional
+</option>
+
+<option>
+Exciting
+</option>
+
+<option>
+Funny
+</option>
+
+<option>
+Viral
+</option>
+
+<option>
+Educational
+</option>
+
+</select>
+
+
+
+<label>
+Language
+</label>
+
+
+<select id="language">
+
+<option>
+English
+</option>
+
+<option>
+Myanmar
+</option>
+
+<option>
+Spanish
+</option>
+
+<option>
+Japanese
+</option>
+
+</select>
+
+
+
+
+<button onclick="generate()">
+Generate Content
+</button>
+
+
+
+<div class="result" id="result"></div>
+
+
+<button class="copy" id="copy">
+Copy Result
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+const API = 
+"https://gamermaid-social-ai-api.tze-oms.workers.dev/";
+
+
+
+let resultText="";
+
+
+
+async function generate(){
+
+
+const result =
+document.getElementById("result");
+
+
+result.style.display="block";
+
+
+result.innerText=
+"Generating...";
+
+
+
+try{
+
+
+const response =
+await fetch(API,{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+tool:
+document.getElementById("tool").value,
+
+
+topic:
+document.getElementById("topic").value,
+
+
+platform:
+document.getElementById("platform").value,
+
+
+tone:
+document.getElementById("tone").value,
+
+
+language:
+document.getElementById("language").value
+
+
+})
+
+});
+
+
+
+const data =
+await response.json();
+
+
+
+resultText =
+data.result || data.error;
+
+
+
+result.innerText =
+resultText;
+
+
+
+document.getElementById("copy")
+.style.display="inline-block";
+
+
+
+}
+
+catch(error){
+
+
+result.innerText=
+"Error: "+error.message;
+
+
+}
+
+
+
+}
+
+
+
+document
+.getElementById("copy")
+.onclick=function(){
+
+
+navigator.clipboard.writeText(resultText);
+
+
+this.innerText="Copied!";
+
+
+};
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
