@@ -16,10 +16,14 @@ onAuthStateChanged
 
 from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
-const firebaseConfig={
-
-PASTE_YOUR_FIREBASE_CONFIG_HERE
-
+const firebaseConfig = {
+  apiKey: "AIzaSyC0mmrQJlriTLEd8xGPLNHbUChnla769zE",
+  authDomain: "gamer-maid.firebaseapp.com",
+  projectId: "gamer-maid",
+  storageBucket: "gamer-maid.firebasestorage.app",
+  messagingSenderId: "221352502412",
+  appId: "1:221352502412:web:af39371a216f56557f87a9",
+  measurementId: "G-XD1F6N2PVH"
 };
 
 const app=initializeApp(firebaseConfig);
