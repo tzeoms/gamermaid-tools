@@ -1,0 +1,42 @@
+
+:root{
+--bg:#0f172a;--card:#1e293b;--primary:#2563eb;--accent:#8b5cf6;--text:#fff;--muted:#cbd5e1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:linear-gradient(180deg,#0f172a,#111827);color:var(--text);line-height:1.6}
+.container{width:min(1200px,92%);margin:auto}
+.navbar{position:sticky;top:0;backdrop-filter:blur(14px);background:rgba(15,23,42,.75);border-bottom:1px solid rgba(255,255,255,.08);z-index:999}
+.nav-container{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{display:flex;gap:12px;align-items:center;color:#fff;text-decoration:none;font-weight:700}
+.logo img{width:42px;height:42px}
+.desktop-nav ul{display:flex;list-style:none;gap:24px}
+.desktop-nav a{text-decoration:none;color:#fff}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:100%;left:0;background:#162033;border-radius:12px;padding:10px;min-width:240px}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:10px;border-radius:8px}
+.dropdown-menu a:hover{background:#24324b}
+.nav-right{display:flex;gap:10px;align-items:center}
+.search-box{padding:10px 14px;border-radius:30px;border:none;background:#1e293b;color:#fff}
+.login-btn,.primary-btn,.secondary-btn{padding:12px 22px;border-radius:30px;border:none;text-decoration:none;cursor:pointer}
+.login-btn,.primary-btn{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff}
+.secondary-btn{border:1px solid #5b6b88;color:#fff}
+.mobile-toggle{display:none}
+.hero{text-align:center;padding:110px 20px}
+.hero h1{font-size:clamp(2.5rem,5vw,4.5rem)}
+.hero p{color:var(--muted);margin:20px 0 35px}
+.hero-buttons{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.featured,.why,.news{padding:80px 0}
+.card-grid,.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:32px}
+.card,.features>div,.news-card{background:rgba(255,255,255,.05);padding:24px;border:1px solid rgba(255,255,255,.08);border-radius:18px;transition:.3s}
+.card:hover,.features>div:hover,.news-card:hover{transform:translateY(-6px)}
+.card a,.news-card a{color:#8ab4ff;text-decoration:none}
+footer{margin-top:60px;background:#0b1220;padding:50px 0}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.footer-grid a{display:block;color:#cbd5e1;text-decoration:none;margin:8px 0}
+.copyright{text-align:center;padding-top:25px;color:#94a3b8}
+@media(max-width:900px){
+.desktop-nav{display:none}
+.mobile-toggle{display:block;background:none;color:#fff;border:none;font-size:28px}
+.search-box{display:none}
+}
