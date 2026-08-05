@@ -1,0 +1,1 @@
+console.log('Gamermaid v2 template loaded');
